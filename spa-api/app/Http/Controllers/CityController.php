@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\City;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CityController extends Controller
 {
@@ -15,10 +15,18 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('cities')->where(function ($query) use ($request) {
+                    return $query->where('state_id', $request->state_id);
+                })
+            ],
             'state_id' => 'required|exists:states,id',
             'city_group_id' => 'nullable|exists:city_groups,id',
         ]);
+
         return City::create($request->all());
     }
 
@@ -30,10 +38,18 @@ class CityController extends Controller
     public function update(Request $request, City $city)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('cities')->where(function ($query) use ($request) {
+                    return $query->where('state_id', $request->state_id);
+                })->ignore($city->id)
+            ],
             'state_id' => 'required|exists:states,id',
             'city_group_id' => 'nullable|exists:city_groups,id',
         ]);
+
         $city->update($request->all());
         return $city;
     }
@@ -44,3 +60,4 @@ class CityController extends Controller
         return response()->noContent();
     }
 }
+
