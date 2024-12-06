@@ -1,23 +1,29 @@
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
+/spa-api/vendor/
+/spa-api/node_modules/
+# /spa-api/.env
+# /spa-api/.env.backup
+/spa-api/.phpunit.result.cache
+/spa-api/composer.lock
+/spa-api/package-lock.json
 
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
+# Laravel storage and public directories
+/spa-api/public/storage
+/spa-api/public/hot
+/spa-api/storage/*.key
+/spa-api/storage/framework/cache/*
+/spa-api/storage/framework/sessions/*
+/spa-api/storage/framework/views/*
+/spa-api/storage/logs/*
 
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
+# IDE and Editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
 
-# Laravel 5 & Lumen specific with changed public path
-public_html/storage
-public_html/hot
-
-storage/*.key
-.env
-Homestead.yaml
-Homestead.json
-/.vagrant
-.phpunit.result.cache
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes

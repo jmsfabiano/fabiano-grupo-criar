@@ -32,8 +32,8 @@ services:
     ports:
       - "3307:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: Senha@123456
-      MYSQL_DATABASE: fabiano_front
+      MYSQL_ROOT_PASSWORD: P<!1G{%9R!9KkMe+
+      MYSQL_DATABASE: laravel-api
     restart: always
     networks:
       - api-network
@@ -46,7 +46,7 @@ services:
     environment:
       PMA_HOST: api-mysql-srv
       PMA_USER: root
-      PMA_PASSWORD: Senha@123456
+      PMA_PASSWORD: P<!1G{%9R!9KkMe+
     restart: always
     networks:
       - api-network
