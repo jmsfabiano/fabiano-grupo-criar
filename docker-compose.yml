@@ -16,6 +16,8 @@ services:
       - ./spa-api/:/var/www/html/spa-api/
       - ./docker-config/default.conf:/etc/nginx/conf.d/default.conf
       - ./docker-config/ssl:/etc/nginx/ssl
+      - ./storage:/var/www/html/spa-api/storage
+      - ./bootstrap/cache:/var/www/html/spa-api/bootstrap/cache
     ports:
       - 8080:80
       - 443:443

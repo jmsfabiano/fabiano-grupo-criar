@@ -27,3 +27,6 @@ RUN chown -R www-data:www-data /var/www/html
 
 RUN chown -R www-data:www-data /var/www/html/spa-api
 RUN chmod -R 755 /var/www/html/spa-api
+RUN chmod -R 775 /var/www/html/spa-api/storage /var/www/html/spa-api/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/spa-api/storage /var/www/html/spa-api/bootstrap/cache
+
