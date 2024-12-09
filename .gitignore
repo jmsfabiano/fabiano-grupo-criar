@@ -5,6 +5,7 @@
 /spa-api/.phpunit.result.cache
 /spa-api/composer.lock
 /spa-api/package-lock.json
+/storage/*
 
 # Laravel storage and public directories
 /spa-api/public/storage
