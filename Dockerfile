@@ -23,10 +23,14 @@ COPY spa-api /var/www/html/spa-api
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
 
-RUN chown -R www-data:www-data /var/www/html
+# RUN chown -R www-data:www-data /var/www/html
 
 RUN chown -R www-data:www-data /var/www/html/spa-api
 RUN chmod -R 755 /var/www/html/spa-api
-RUN chmod -R 775 /var/www/html/spa-api/storage /var/www/html/spa-api/bootstrap/cache
-RUN chown -R www-data:www-data /var/www/html/spa-api/storage /var/www/html/spa-api/bootstrap/cache
+RUN mkdir -p /var/www/html/spa-api/storage/framework/cache/data
+RUN chmod -R 775 /var/www/html/spa-api/storage 
+RUN chmod -R 775 /var/www/html/spa-api/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/spa-api/storage
+RUN chown -R www-data:www-data /var/www/html/spa-api/bootstrap/cache
+
 
