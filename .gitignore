@@ -6,6 +6,9 @@
 /spa-api/composer.lock
 /spa-api/package-lock.json
 /storage/*
+/bootstrap/*
+/database/*
+/vendor/*
 
 # Laravel storage and public directories
 /spa-api/public/storage
