@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sale;
+use App\Models\City;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -23,8 +25,8 @@ class SaleController extends Controller
 
         $sale = Sale::create([
             'city_id' => $request->city_id,
-            'total_price' => 0, // Será calculado
-            'applied_discount' => 0,
+            'total' => 0,
+            'discount_applied' => 0,
         ]);
 
         $totalPrice = 0;
@@ -33,8 +35,35 @@ class SaleController extends Controller
             $totalPrice += $product['quantity'] * Product::find($product['id'])->price;
         }
 
-        $sale->update(['total_price' => $totalPrice]);
+        $city = City::with(['cityGroup.campaign.discounts'])->find($request->city_id);
+        $discount = 0;
 
-        return $sale->load('products');
+        if ($city->cityGroup && $city->cityGroup->campaign) {
+            $campaignDiscount = $city->cityGroup->campaign->discounts->first();
+            if ($campaignDiscount) {
+                if (!$campaignDiscount->minimum_value || $totalPrice >= $campaignDiscount->minimum_value) {
+                    if ($campaignDiscount->type === 'percentage') {
+                        $discount = ($totalPrice * $campaignDiscount->percentage_discount) / 100;
+                    } else {
+                        $discount = $campaignDiscount->value_discount;
+                    }
+                }
+            }
+        }
+
+        $sale->update([
+            'total' => $totalPrice,
+            'discount_applied' => $discount
+        ]);
+
+        return $sale->load(['products', 'city.cityGroup.campaign.discounts']);
+    }
+
+    public function show(Sale $sale)
+    {
+        if (!$sale->exists()) {
+            return response()->json(['message' => 'Record not found'], 404);
+        }
+        return $sale->load(['city', 'products']);
     }
 }
