@@ -9,7 +9,7 @@ class CityController extends Controller
 {
     public function index()
     {
-        return City::with(['state', 'cityGroup'])->get();
+        return City::with(['state', 'cityGroup'])->orderBy('name')->get();
     }
 
     public function store(Request $request)
@@ -32,6 +32,9 @@ class CityController extends Controller
 
     public function show(City $city)
     {
+        if (!$city->exists()) {
+            return response()->json(['message' => 'Record not found'], 404);
+        }
         return $city->load(['state', 'cityGroup']);
     }
 
@@ -56,6 +59,9 @@ class CityController extends Controller
 
     public function destroy(City $city)
     {
+        if (!$city->exists()) {
+            return response()->json(['message' => 'Record not found'], 404);
+        }
         $city->delete();
         return response()->noContent();
     }

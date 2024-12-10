@@ -9,6 +9,8 @@
 /bootstrap/*
 /database/*
 /vendor/*
+composer.json
+composer.lock
 
 # Laravel storage and public directories
 /spa-api/public/storage

@@ -23,6 +23,9 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+        if (!$product->exists()) {
+            return response()->json(['message' => 'Record not found'], 404);
+        }
         return $product;
     }
 
@@ -38,6 +41,9 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        if (!$product->exists()) {
+            return response()->json(['message' => 'Record not found'], 404);
+        }
         $product->delete();
         return response()->noContent();
     }

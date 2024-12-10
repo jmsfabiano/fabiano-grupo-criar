@@ -9,7 +9,13 @@ class Discount extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['campaign_id', 'type', 'value'];
+    protected $fillable = [
+        'campaign_id', 
+        'type', 
+        'percentage_discount', 
+        'value_discount',
+        'minimum_value'
+    ];
     
     const TYPE_PERCENTAGE = 'percentage';
     const TYPE_VALUE = 'value';
