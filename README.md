@@ -7,7 +7,8 @@ Endereco api:
 - https://fabiano.localhost/api
 
 Observações: 
-- Aguarde uns instante até que o script de inicialização seja executado.
+- Aguarde uns instante até que o script de inicialização seja executado,
+  se a api ainda não estiver respondendo verifique o log do container api-php-srv.
 - O script popula a tabela de estado com 27 estados brasileiros.
 
 Documentação da API:
