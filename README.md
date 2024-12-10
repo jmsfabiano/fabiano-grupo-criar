@@ -1,13 +1,17 @@
 # fabiano-grupo-criar
 
-composer install
-npm install
-php /var/www/html/spa-api/artisan migrate
-php /var/www/html/spa-api/artisan db:seed
-php artisan serve
+Subir os containes do Docker
+- docker-compose up --build -d
 
+Endereco api: 
+- https://fabiano.localhost/api
 
-endereco api: http://localhost:8000/
+Observações: 
+- Aguarde uns instante até que o script de inicialização seja executado.
+- O script popula a tabela de estado com 27 estados brasileiros.
 
-
-mysql -h 127.0.0.1 -P 3307 -u root -p
+Documentação da API:
+- Arquivo de coleção do postman:
+    - CRIAR.postman_collection.json
+- Ou acessar diretamente pelo postman:
+    - https://www.postman.com/navigation-administrator-25529669/public-workspace/request/7man01j/create-group
